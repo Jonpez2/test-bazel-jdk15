@@ -1,0 +1,5 @@
+java_library(
+    name = "test-jdk15",
+    javacopts = ["--enable-preview"],
+    srcs = ["TestJDK15.java"],
+)
