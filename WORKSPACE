@@ -1,39 +1,26 @@
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
-
 http_archive(
-    name = "remote_java_tools",
-    sha256 = "12cffbb7c87622a6bd6e9231e81ecb9efdb118afbdd6e047ef06eeb3d72a7dc3",
+    name = "jdk-build-archive-darwin",
+    build_file_content = "java_runtime(name = 'runtime', srcs =  glob(['**']), visibility = ['//visibility:public'])",
+    sha256 = "e1d4868fb082d9202261c5a05251eded56fb805da2d641a65f604988b00b1979",
+    strip_prefix = "jdk-15.0.1.jdk/Contents/Home",
     urls = [
-        "https://mirror.bazel.build/bazel_java_tools/releases/java/v11.1/java_tools-v11.1.zip",
-        "https://github.com/bazelbuild/java_tools/releases/download/java_v11.1/java_tools-v11.1.zip",
+        "https://download.java.net/java/GA/jdk15.0.1/51f4f36ad4ef43e39d0dfdbaf6549e32/9/GPL/openjdk-15.0.1_osx-x64_bin.tar.gz",
     ],
 )
 
 http_archive(
-    name = "remote_java_tools_linux",
-    sha256 = "a0dea21d348c8be94d06fde5a6c18d7691aa659cd56c3f1f932f0a28ae943a23",
-    urls = [
-        "https://mirror.bazel.build/bazel_java_tools/releases/java/v11.1/java_tools_linux-v11.1.zip",
-        "https://github.com/bazelbuild/java_tools/releases/download/java_v11.1/java_tools_linux-v11.1.zip",
-    ],
-)
-
-http_archive(
-    name = "remote_java_tools_windows",
-    sha256 = "ac4d22ce9b10a1d5e46cbae0beb63221d96043d1f3543a729482005481e3e51a",
-    urls = [
-        "https://mirror.bazel.build/bazel_java_tools/releases/java/v11.1/java_tools_windows-v11.1.zip",
-        "https://github.com/bazelbuild/java_tools/releases/download/java_v11.1/java_tools_windows-v11.1.zip",
-    ],
-)
-
-http_archive(
-    name = "remote_java_tools_darwin",
-    sha256 = "72a2f34806e7f83b111601495c3bd401b96ea1794daa259608481fd4f6a60629",
-    urls = [
-        "https://mirror.bazel.build/bazel_java_tools/releases/java/v11.1/java_tools_darwin-v11.1.zip",
-        "https://github.com/bazelbuild/java_tools/releases/download/java_v11.1/java_tools_darwin-v11.1.zip",
-    ],
+    name = "openjdk15_linux_archive",
+    build_file_content = """
+java_runtime(name = 'runtime', srcs =  glob(['**']), visibility = ['//visibility:public'])
+exports_files(["WORKSPACE"], visibility = ["//visibility:public"])
+""",
+    sha256 = "0a38f1138c15a4f243b75eb82f8ef40855afcc402e3c2a6de97ce8235011b1ad",
+    strip_prefix = "zulu15.27.17-ca-jdk15.0.0-linux_x64",
+     urls = [
+        "https://mirror.bazel.build/cdn.azul.com/zulu/bin/zulu15.27.17-ca-jdk15.0.0-linux_x64.tar.gz",
+        "https://cdn.azul.com/zulu/bin/zulu15.27.17-ca-jdk15.0.0-linux_x64.tar.gz",
+     ],
 )
 

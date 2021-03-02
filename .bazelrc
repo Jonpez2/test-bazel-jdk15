@@ -1,1 +1,4 @@
-build --java_language_version=15 --java_runtime_version=15
+build --java_toolchain=@remote_java_tools_linux//:toolchain_jdk_15
+build --host_java_toolchain=@remote_java_tools_linux//:toolchain_jdk_15
+build --javabase=@jdk-build-archive-darwin//:runtime
+build --host_javabase=@jdk-build-archive-darwin//:runtime
